@@ -9,7 +9,7 @@ class Beach:
         self.water_temp = water_temp
         self.quality_status = quality_status
         # (red, green) e.g. (17, 18)
-        self.led_pins = led_pins
+        self.set_led_pins(led_pins)
         self.api_client = api_client
 
     def get_name(self):
@@ -43,20 +43,25 @@ class Beach:
         self.water_temp = water_temp
 
     def set_quality_status(self, quality_status):
+        print(f"Setting quality for beach ${self.get_name()}, to ${quality_status}")
         self.quality_status = quality_status
         self.set_LED(quality_status)
 
     def set_led_pins(self, led_pins):
-        self.led_pins = led_pins
+        red_led = gpiozero.LED(led_pins[0])
+        green_led = gpiozero.LED(led_pins[1])
+        self.led_pins = (red_led, green_led)
 
     # Quality status: 1 = bad (red LED), 2 = good (green LED)
     def set_LED(self, quality_status):
-        red_led = gpiozero.LED(self.led_pins[0])
-        green_led = gpiozero.LED(self.led_pins[1])
-        if quality_status == 1:
+        red_led = self.led_pins[0]
+        green_led = self.led_pins[1]
+        print("in set LED")
+        if int(quality_status) == 1:
             red_led.on()
             green_led.off()
-        elif quality_status == 2:
+        elif int(quality_status) == 2:
+            print("Found status good!")
             red_led.off()
             green_led.on()
         else:

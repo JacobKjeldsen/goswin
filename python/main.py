@@ -1,21 +1,21 @@
 from beaches.beach import Beach
-from beach_api import BeachAPI
+from beaches.beach_api import BeachAPI
 import time
 
 
 def make_beach_objects(api_client):
     beaches_json = api_client.get_beach_status()
     beach_objects = []
-    denpermanente = Beach("Den Permanente", 56.1533, 10.2107, 0, 0, (0, 0), api_client)
-    havnebadet = Beach("Havnebadet Aarhus", 56.1555, 10.2107, 0, 0, (0, 0), api_client)
-    marselisborg = Beach("Marselisborg Lystbådehavn, østmole", 56.1533, 10.2107, 0, 0, (0, 0), api_client)
-    tangkrogen = Beach("Tangkrogen", 56.1533, 10.2107, 0, 0, (0, 0), api_client)
-    openwater = Beach("Open Water svømmebane", 56.1533, 10.2107, 0, 0, (0, 0), api_client)
-    beach_objects.append(denpermanente)
-    beach_objects.append(havnebadet)
+    #denpermanente = Beach("Den Permanente", 56.1533, 10.2107, 0, 0, (0, 0), api_client)
+    #havnebadet = Beach("Havnebadet Aarhus", 56.1555, 10.2107, 0, 0, (0, 0), api_client)
+    marselisborg = Beach("Marselisborg Lystbådehavn, østmole", 56.1533, 10.2107, 0, 0, (17, 27), api_client)
+    #tangkrogen = Beach("Tangkrogen", 56.1533, 10.2107, 0, 0, (0, 0), api_client)
+    #openwater = Beach("Open Water svømmebane", 56.1533, 10.2107, 0, 0, (0, 0), api_client)
+    #beach_objects.append(denpermanente)
+    #beach_objects.append(havnebadet)
     beach_objects.append(marselisborg)
-    beach_objects.append(tangkrogen)
-    beach_objects.append(openwater)
+    #beach_objects.append(tangkrogen)
+    #beach_objects.append(openwater)
 
     for beach in beach_objects:
         lat, long = api_client.get_location(beaches_json, beach.get_name())
